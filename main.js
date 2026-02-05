@@ -25,6 +25,7 @@ let gameTick = 0;
 let startTime = Date.now();
 let isGameOver = false;
 let lastRouletteMinute = 0;
+let lastRouletteCount = 0; // ルーレット専用のカウンター（新設）
 
 // --- 敵の基本ステータス ---
 let enemyBaseSpeed = 1.2;
@@ -63,18 +64,22 @@ function updateTimer() {
     if (isGameOver) return;
 
     const elapsedSeconds = Math.floor((Date.now() - startTime) / 1000);
-    const currentMinute = Math.floor(elapsedSeconds / 30);
-
-    // 1分ごとにルーレット実行
-    if (currentMinute > lastRouletteMinute) {
-        lastRouletteMinute = currentMinute;
+    
+    // 1. ルーレットの判定 (30秒ごとに独立してカウント)
+    const currentRouletteInterval = Math.floor(elapsedSeconds / 30);
+    if (currentRouletteInterval > lastRouletteCount) {
+        lastRouletteCount = currentRouletteInterval;
         roulette.start();
     }
 
-    const mins = currentMinute.toString().padStart(2, '0');
+    // 2. 画面表示用の計算 (ルーレットとは関係なく正しく分・秒を出す)
+    const mins = Math.floor(elapsedSeconds / 60).toString().padStart(2, '0');
     const secs = (elapsedSeconds % 60).toString().padStart(2, '0');
+    
+    // 画面中央のタイマーを更新
     timerElement.innerText = `${mins}:${secs}`;
 }
+
 
 function endGame() {
     isGameOver = true;
