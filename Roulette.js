@@ -29,18 +29,11 @@ start() {
             this.strip.appendChild(div);
         });
 
-        // --- 修正ポイント：インデックスの調整 ---
-        // 50番目を当選と判定していた場合、見た目上のズレを補正するために
-        // 実際に矢印の下に来るアイテムを resultIndex として固定します。
         const resultIndex = 50; 
         
         const containerWidth = 350; // CSSのwidth (固定値で計算したほうが安定します)
         const centerOfContainer = containerWidth / 2;
 
-        // 【ここが重要】
-        // -(resultIndex * itemWidth) で50番目の左端がコンテナの左端に来ます。
-        // そこに (centerOfContainer - itemWidth / 2) を足すことで、
-        // 50番目の中心がコンテナの中心（矢印）に重なります。
         const stopPos = -(resultIndex * this.itemWidth) + (centerOfContainer - this.itemWidth / 2);
 
         setTimeout(() => {

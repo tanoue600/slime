@@ -180,24 +180,30 @@ canvas {
 /* --- センターマーカー (金の針) --- */
 #roulette-marker {
     position: absolute;
-    top: 30px; /* ラベルの下から開始 */
+    top: 30px; /* ラベルの下に配置 */
     left: 50%;
     transform: translateX(-50%);
-    width: 2px;
-    height: 85px;
-    background: #f1c40f;
-    box-shadow: 0 0 10px #f1c40f;
+    width: 0; 
+    height: 0;
+    /* 背景色は透明にし、境界線で三角形を作る */
+    background: transparent;
     z-index: 1100;
     pointer-events: none;
+    box-shadow: none;
 }
 
 #roulette-marker::after {
     content: '▼';
     position: absolute;
-    top: -5px;
+    top: -5px; /* 少し上にずらして窓の枠にかぶせる */
     left: 50%;
     transform: translateX(-50%);
     color: #f1c40f;
-    font-size: 24px;
-    text-shadow: 0 0 15px gold;
+    font-size: 28px; /* 少し大きくして視認性アップ */
+    text-shadow: 0 0 15px rgba(255, 215, 0, 0.8), 0 2px 4px rgba(0,0,0,0.5);
+}
+
+/* ついでに：文字を見やすくするためにアイテムのパディングを調整 */
+.roulette-item {
+    padding-top: 10px; /* 文字を少し下にずらして矢印との被りを避ける */
 }
