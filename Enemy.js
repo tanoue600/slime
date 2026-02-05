@@ -3,7 +3,7 @@ class Enemy {
         this.radius = 35; 
         this.x = Math.random() < 0.5 ? -50 : canvasWidth + 50; 
         this.y = Math.random() * canvasHeight;
-        this.hp = Math.floor(Math.random() * 21) + 40; 
+        this.hp = enemyBaseHp + Math.random() * 20; 
         this.color = '#c0392b';
         this.shootTimer = Math.random() * 60;
     }
@@ -16,8 +16,8 @@ class Enemy {
         });
         if (nearestSlime) {
             const angle = Math.atan2(nearestSlime.y - this.y, nearestSlime.x - this.x);
-            this.x += Math.cos(angle) * 1.2;
-            this.y += Math.sin(angle) * 1.2;
+            this.x += Math.cos(angle) * enemyBaseSpeed;
+            this.y += Math.sin(angle) * enemyBaseSpeed;
             return angle; // 弾を撃つ方向を返す
         }
         return null;

@@ -6,9 +6,33 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="ui">Score: <span id="score">0</span></div>
+    <div id="ui">
+        Score: <span id="score">0</span>
+    </div>
+
+    <div id="timer-container">
+        <span id="timer">00:00</span>
+    </div>   
+
+    <div id="roulette-container">
+        <div id="roulette-label">EMERGENCY: ENEMY EVOLUTION</div>
+        <div id="roulette-window">
+            <div id="roulette-strip">
+                </div>
+            <div id="roulette-marker">▼</div>
+        </div>
+    </div>
+
+    <div id="game-over-panel">
+    <h1>GAME OVER</h1>
+    <p>Score: <span id="final-score">0</span></p>
+    <p>Time: <span id="final-time">00:00</span></p>
+    <button onclick="location.reload()">RETRY</button>
+    </div>
+
     <canvas id="gameCanvas"></canvas>
 
+    <script src="Roulette.js"></script>
     <script src="Particle.js"></script>
     <script src="Bullet.js"></script>
     <script src="Slime.js"></script>
